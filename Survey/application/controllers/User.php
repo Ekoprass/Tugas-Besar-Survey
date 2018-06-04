@@ -29,7 +29,45 @@
 
 		}
 
-		
+		public function getAllUser()
+   		{
+	       
+    	}
+
+		public function createID()
+		{
+			# code...
+		}
+
+		public function addUser()
+		{
+			# code...
+		}
+
+		public function editUser()
+		{
+			# code...
+		}
+
+		public function deleteUser()
+		{
+			# code...
+		}
+
+		public function setSurvey()
+		{
+			# code...
+		}
+
+		public function SubmitSurvey()
+		{
+			# code...
+		}
+
+		public function dataUsers()
+		{
+			//$this->load->view('user/tabel_user');
+		}
 	
 	}
 	

@@ -8,6 +8,14 @@
 				parent::__construct();
 				//Do your magic here
 			}
+		
+		public function getDataUser()
+		{
+			$query=$this->db->get('user');
+			if ($query->num_rows()>0) {
+				return $query->result_array();
+			}
+		}	
 
 		public function getDataUserByID($id_user)
 		{
@@ -15,6 +23,52 @@
 			$query=$this->db->get('user');
 			return $query->result_array();
 		}
+
+		public function getDataUserByStatus($status)
+		{
+			$this->db->where('status_user', $status);
+			$query=$this->db->get('user');
+			return $query->result_array();
+		}
+
+		public function tambahUser()
+		{
+			$object =  array(
+				'nama' => $this->input->post('nama'),
+				'username' => $this->input->post('username'),
+				'password' => md5($this->input->post('password')),
+				'status_user' => 'Aktif',
+				'akses' => '1',
+				
+			);
+			$this->db->insert('user', $object);
+		}
+
+		public function editUser()
+		{
+			$id= $this->input->post('id_user');
+			$object =  array(
+				'nama' => $this->input->post('nama'),
+				'NIK' => $this->input->post('NIK'),
+				'username' => $this->input->post('username'),
+				'password' => md5($this->input->post('password')),
+				'status_user' => 'Aktif',
+				'akses' => '1',
+				'tglLahir' => $this->input->post('tglLahir'),
+				'alamat' => $this->input->post('alamat'),
+				'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+				'kota' => $this->input->post('kota'),
+				'pendidikan_terakhir' => $this->input->post('pendidikan_terakhir'),
+				'pekerjaan' => $this->input->post('pekerjaan'),
+				'umur' => $this->input->post('umur'),
+				'status' => 'Verified',
+
+				
+			);
+			$this->db->where('id_user', $id);
+			$this->db->update('pegawai', $object);
+		}
+
 	
 		public function Login($username,$password)
 		{

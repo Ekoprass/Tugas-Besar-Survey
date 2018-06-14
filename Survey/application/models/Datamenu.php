@@ -6,11 +6,20 @@
 	
 		public function getMenu($akses)
 			{
-				$this->db->select('menu,level,akses,icon,link');
-				$this->db->from('menu');
 				$this->db->where('akses', $akses);
-				$query=$this->db->get();
+				$this->db->where('level', "0");
+				$query=$this->db->get('menu');
 				return $query->result_array();
+			}	
+
+		public function getMenu2($akses)
+			{
+				$this->db->where('akses', $akses);
+				$this->db->where('level >', "0");
+				$menu = $this->db->get('menu');
+				return $menu->result_array();
+				
+				
 			}	
 	
 	}

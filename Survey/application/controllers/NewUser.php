@@ -1,8 +1,7 @@
 <?php 
-
 	defined('BASEPATH') OR exit('No direct script access allowed');
 	
-	class DataUser extends CI_Controller {
+	class NewUser extends CI_Controller {
 	
 		public function __construct()
 		{
@@ -13,14 +12,13 @@
 				$session_data=$this->session->userdata('logged_in');
 					$id_user=$session_data['id_user'];
 					$data['akses']=$session_data['akses'];
-			
+
 					$akses=$session_data['akses'];
 					$data['usr']="user";
 					$data['user']=$this->user_model->getDataUserByID($id_user);
-					$data['menus'] = $this->Datamenu->getMenu($akses);
 					$data['menu2'] = $this->Datamenu->getMenu2($akses);
-					$data['users']=$this->user_model->getDataUser($id_user);
-					$this->load->view('user/tableusr',$data);
+					$data['menus'] = $this->Datamenu->getMenu($akses);
+					$this->load->view('user/tambahuser',$data);
 			}else{
 				redirect('login','refresh');
 			}
@@ -29,26 +27,10 @@
 		public function index()
 		{
 			
-	        
-		}
-		
-		public function edit($id)
-		{
-			redirect('user/edit/'.$id.'','refresh');
 		}
 	
-
-		public function detail($id)
-		{
-			redirect('user/detail/'.$id.'','refresh');
-		}
-
-		public function deleteUser()
-		{
-			
-		}
 	}
 	
-	/* End of file getAllUser.php */
-	/* Location: ./application/controllers/getAllUser.php */
+	/* End of file NewUser.php */
+	/* Location: ./application/controllers/NewUser.php */
  ?>

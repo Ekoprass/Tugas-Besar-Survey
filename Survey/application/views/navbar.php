@@ -14,11 +14,9 @@
   <link href="<?php echo base_url() ?>assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url() ?>assets/css/sb-admin.css" rel="stylesheet">
-      <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>assets/jsgrid/jsgrid.min.css" />
-    <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>assets/jsgrid/jsgrid-theme.min.css" />
-    <script src="<?php echo base_url()?>assets/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url()?>assets/jsgrid/jsgrid.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url()?>assets/custom/tables/users.js"></script>
+  
+  <link href="<?php echo base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -30,22 +28,38 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <?php foreach ($menus as $key)  {?>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="<?php site_url(''); echo $key['link']?>">
-              <i class="fa fa-fw <?php echo $key['icon']; ?>"></i>
-              <span class="nav-link-text"><?php echo $key['menu']; ?></span>
-            </a>
-            <ul class="sidenav-second-level collapse" id="collapseComponents">
-              <li>
-                <a href="navbar.html">Navbar</a>
-              </li>
-            </ul>
-        </li>
-        <?php  } ?>
-
-
        
+      <?php foreach ($menus as $key ) {
+          if ($key['parent']==0) {?>
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="<?php echo $key['menu'] ?>">
+            <?php 
+                echo anchor($key['link'], '<i class="fa fa-fw '.$key['icon'].'"></i>
+              <span class="nav-link-text">'.$key['menu'].'</span>', 'class="nav-link" data-parent="#exampleAccordion"');
+             ?>
+          </li>
+      <?php 
+          }if ($key['parent']==1) {?>
+
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="<?php echo $key['menu'] ?>">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#<?php echo $key['menu'] ?>" data-parent="#exampleAccordion">
+            <i class="fa fa-fw <?php echo $key['icon'] ?>"></i>
+            <span class="nav-link-text"><?php echo $key['menu'] ?></span>
+          </a>
+            <ul class="sidenav-second-level collapse" id="<?php echo $key['menu'] ?>">
+              <?php foreach ($menu2 as $m2) {
+                    if ($m2['level']==$key['id']) {?>
+                        <li>
+                          <?php echo anchor($m2['link'], "<i class='fa fa-fw ".$m2['icon']."'></i> <span class='nav-link-text'>".$m2['menu']."</span>", ""); ?>
+                           
+                        </li>
+              <?php }
+               } ?>
+              
+            </ul>
+          </li>
+           
+      <?php }
+      } ?>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
@@ -67,7 +81,7 @@
     
 
 
-
+ 
 
 
 

@@ -26,36 +26,46 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="<?php site_url('') ?>login/logout">Logout</a>
+            <?php echo anchor('login/logout', 'Logout', 'class="btn btn-primary"'); ?>
           </div>
         </div>
       </div>
     </div>
     <!-- Bootstrap core JavaScript-->
     <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
+
+    
+
+
     <script src="<?php echo base_url() ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
     <script src="<?php echo base_url() ?>assets/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="<?php echo base_url() ?>assets/js/sb-admin.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/sb-admin-datatables.min.js"></script>
+
+
+    <script src="<?php echo base_url() ?>assets/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="<?php echo base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.js"></script>
     <!-- Custom scripts for this page-->
     <!-- Toggle between fixed and static navbar-->
-    <script>
+   <!--  <script>
     $('#toggleNavPosition').click(function() {
       $('body').toggleClass('fixed-nav');
       $('nav').toggleClass('fixed-top static-top');
     });
 
-    </script>
+    </script> -->
     <!-- Toggle between dark and light navbar-->
-    <script>
+   <!--  <script>
     $('#toggleNavColor').click(function() {
       $('nav').toggleClass('navbar-dark navbar-light');
       $('nav').toggleClass('bg-dark bg-light');
       $('body').toggleClass('bg-dark bg-light');
     });
 
-    </script>
+    </script> -->
+
   </div>
 </body>
 

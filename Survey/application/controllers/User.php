@@ -24,7 +24,7 @@
 					}if ($this->uri->segment(2)=="detail") {
 						$this->load->view('user/beranda',$data, true);
 					}else{
-						$this->load->view('user/beranda',$data, true);
+						$this->load->view('user/beranda',$data);
 					}
 			}else{
 				redirect('login','refresh');
@@ -46,12 +46,13 @@
 			$data['user']=$this->user_model->getDataUserByID($id_user);
 			$data['menus'] = $this->Datamenu->getMenu($akses);
 			$this->load->view('user/formusr',$data);
-		}
 
-		
+
+		}
 
 		public function editDataUser()
 		{
+
 			$this->load->model('user_model');
 			$this->load->helper('url','form');
 			$this->load->library('form_validation');
@@ -118,18 +119,10 @@
 			}
 		}
 
-		
-
-		public function setSurvey()
+		public function setSurvey($id_survey)
 		{
-			# code...
+			$this->user_model->setSurvey($id_survey);
 		}
-
-		public function SubmitSurvey()
-		{
-			# code...
-		}
-
 		
 	
 	}

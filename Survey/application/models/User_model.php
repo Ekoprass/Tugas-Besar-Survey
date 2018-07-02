@@ -108,6 +108,11 @@
 				return false;
 			}
 		}
+
+		public function setSurvey($id_survey)
+		{
+			# code...
+		}
 	}
 	
 	/* End of file UserModel.php */

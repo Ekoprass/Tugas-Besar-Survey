@@ -19,7 +19,7 @@
 			
 		}
 
-		public function createQuestion($id_survey)
+		public function createQuestion()
 		{
 			if ($this->session->userdata('logged_in')) {
 					$session_data=$this->session->userdata('logged_in');

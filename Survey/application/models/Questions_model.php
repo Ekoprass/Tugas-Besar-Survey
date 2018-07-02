@@ -24,10 +24,10 @@
 
 		public function tambahQuestion($idSurvey)
 		{
-			$query=$this->db->query('select count(id_question) as id from question where id_survey="$idSurvey"');
+			$this->db->where('id_survey', $idSurvey);
+			$query=$this->db->get('question');
 			$id= $query->num_rows();
 			$str=$id+1;
-
 			$idquestion=$idSurvey.'-Q0'.$str;
 			if ($this->input->post('required')=="Required") {
 				$req="Required";

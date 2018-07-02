@@ -112,7 +112,6 @@
 		public function detailUserSurvey($id_survey)
 		{
 			$session_data=$this->session->userdata('logged_in');
-			$session_data=$this->session->userdata('logged_in');
 			$id_user=$session_data['id_user'];
 			$data['akses']=$session_data['akses'];
 
@@ -124,6 +123,21 @@
 			$data['menu2'] = $this->Datamenu->getMenu2($akses);
 			$data['menus'] = $this->Datamenu->getMenu($akses);
 			$this->load->view('user/detailsurvey',$data);
+		}
+
+		public function tampilkanSurvey($id_survey)
+		{
+			$session_data=$this->session->userdata('logged_in');
+			$id_user=$session_data['id_user'];
+			$data['akses']=$session_data['akses'];
+			$akses=$session_data['akses'];
+			$data['usr']="user";
+			$data['user']=$this->User_model->getDataUserByID($id_user);
+			$data['surveyid']=$this->Survey_model->getDataSurveyByID($id_survey);
+			$data['questions']=$this->Questions_model->getDataQuestionSurvey($id_survey);
+			$data['menu2'] = $this->Datamenu->getMenu2($akses);
+			$data['menus'] = $this->Datamenu->getMenu($akses);
+			$this->load->view('user/survey',$data);
 		}
 
 		public function deleteSurvey()

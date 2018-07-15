@@ -44,14 +44,26 @@
 			$this->db->insert('question', $object);
 		}
 
-		public function editQuestion()
+		public function editQuestion($id_question)
 		{
-			# code...
+			if ($this->input->post('required')=="Required") {
+				$req="Required";
+			}else{
+				$req=" ";
+			}
+			$object =  array(
+				'question' => $this->input->post('question'),
+				'type' => $this->input->post('type'),
+				'required' => $req,
+			);
+			$this->db->where('id_question', $id_question);
+			$this->db->update('question', $object);
 		}
 
 		public function deleteQuestion($idQuestion)
 		{
-			# code...
+			$this->db->where('id_question', $idQuestion);
+			$this->db->delete('question');
 		}
 
 		public function getJawabanQuestion($idQuestion)
@@ -70,14 +82,72 @@
 			$this->db->insert('answer_question', $object);
 		}
 
-		public function editJawaban($idJawaban)
-		{
-			# code...
-		}
-
 		public function deleteJawaban($idJawaban)
 		{
-			# code...
+			$this->db->where('id_answer', $idJawaban);
+			$this->db->delete('answer_question');
+		}
+
+		public function jawabanUser($id_survey)
+		{
+			$jawabanesai=$this->input->post('[jawabanesai][]');
+			$idquestion=$this->input->post('[id_question][]');
+			$iduser=$this->input->post('[id_user][]');
+
+			$x= count($jawabanesai);
+			
+			for ($i=0; $i < $x; $i++) { 
+				$data = array(
+					'jawaban' => $jawabanesai[$i], 
+					'id_question' => $idquestion[$i],
+					'id_user' => $iduser[$i], 
+				);
+				$this->db->insert('answer_user', $data);
+				// echo $data['jawaban']."<br>";
+				// echo $data['id_question']."<br>";
+			}
+			
+			$this->db->where('id_survey', $id_survey);
+			$this->db->where('type', 'Pilihan Ganda');
+			$query=$this->db->get('question');
+			$rads= $query->result_array();
+			foreach ($rads as $key ) {
+				$jawabanradio=$this->input->post('jawabanradio'.$key['id_question'].'');
+				
+
+				$str=explode(",", $jawabanradio[0]);
+				$jawaban=$str[0];
+				$qid=$str[1];
+				$usrid=$str[2];
+				$data = array(
+					'jawaban' => $jawaban,
+					'id_question' => $qid,
+					'id_user' => $usrid,
+				);
+			$this->db->insert('answer_user', $data);
+				// echo $data['jawaban']."<br>";
+				// echo $data['id_question']."<br>";
+				
+			}
+
+			$jawabanmulti=$this->input->post('[jawabanmulti][]');
+			foreach ($jawabanmulti as $key ) {
+				$str=explode(",", $key);
+				$jawaban=$str[0];
+				$qid=$str[1];
+				$usrid=$str[2];
+				$data = array(
+					'jawaban' => $jawaban,
+					'id_question' => $qid,
+					'id_user' => $usrid,
+				);
+
+			$this->db->insert('answer_user', $data);
+
+				// echo $data['jawaban']."<br>";
+				// echo $data['id_question']."<br>";
+			}
+		
 		}
 	
 	}

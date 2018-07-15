@@ -23,7 +23,7 @@
 						$this->load->view('user/beranda',$data, true);
 					}if ($this->uri->segment(2)=="detail") {
 						$this->load->view('user/beranda',$data, true);
-					}else{
+					}if ($this->uri->segment(2)=="") {
 						$this->load->view('user/beranda',$data);
 					}
 			}else{
@@ -121,7 +121,10 @@
 
 		public function setSurvey($id_survey)
 		{
-			$this->user_model->setSurvey($id_survey);
+			$this->load->helper('url','form');
+			$this->user_model->setSurvey();
+			echo "<script>alert('Verifikasi Berhasil');
+							window.location.href='".site_url()."/survey/tampilkanSurvey/".$id_survey."';</script>";
 		}
 		
 	

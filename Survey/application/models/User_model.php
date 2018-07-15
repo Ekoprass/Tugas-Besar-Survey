@@ -109,9 +109,17 @@
 			}
 		}
 
-		public function setSurvey($id_survey)
+		public function setSurvey()
 		{
-			# code...
+			date_default_timezone_set('Asia/Jakarta');
+			$dikerjakan = date("Y-m-d h:i:s");
+			$object =  array(
+				'id_user' => $this->input->post('id_user'),
+				'id_survey' => $this->input->post('id_survey'),
+				'status' => 'Partisipan',
+				'dikerjakan' => $dikerjakan,
+			);
+			$this->db->insert('partisipan', $object);
 		}
 	}
 	

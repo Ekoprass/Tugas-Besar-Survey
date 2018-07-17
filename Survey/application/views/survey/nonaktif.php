@@ -5,7 +5,7 @@
             
         <div class="card mb-3">
 	        <div class="card-header">
-	          <i class="fa fa-table"></i> Data Table Survey
+	          <i class="fa fa-table"></i> Data Table Survey Nonaktif
 	      	</div>
 	        <div class="card-body">
 	          <div class="table-responsive">       
@@ -41,7 +41,7 @@
 		        		 	echo anchor('/survey/detail/'.$key['id_survey'].'', 'Detail', "class='btn btn-primary'")."&nbsp"; 
 							echo anchor('/survey/editSurvey/'.$key['id_survey'].'', 'Edit', "class='btn btn-info'")."&nbsp";
 		        	?>
-		        	<button data-toggle="modal" data-target="#deleteSurvey" class='btn btn-danger'>Delete</button>
+		        	<button data-toggle="modal" data-target="#deleteSurvey1" class='btn btn-danger'>Delete</button>
 		        </td>
 		    </tr>
 		<?php } ?>
@@ -54,7 +54,7 @@
 </div>
 
 
-<div class="modal fade" id="deleteSurvey" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteSurvey1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -66,9 +66,7 @@
           <div class="modal-body">Delete Data Survey ?</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <?php echo anchor('/survey/deleteSurvey/'.$key['id_survey'].'', 'Nonaktifkan', "class='btn btn-warning'")."&nbsp"; ?>
             <?php echo anchor('/survey/delete/'.$key['id_survey'].'', 'Delete', "class='btn btn-danger'")."&nbsp"; ?>
-
           </div>
         </div>
       </div>

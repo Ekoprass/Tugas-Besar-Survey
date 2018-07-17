@@ -1,11 +1,11 @@
-<?php $this->view('navbar') ?>
+<?php $this->view('navbar.php') ?>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 	<div class="container center-block">
 
             
         <div class="card mb-3">
 	        <div class="card-header">
-	          <i class="fa fa-table"></i> Data Table Users
+	          <i class="fa fa-table"></i> Data Table Survey
 	      	</div>
 	        <div class="card-body">
 	          <div class="table-responsive">       
@@ -15,29 +15,38 @@
 	    <thead>
 			<tr class="odd gradeX">
     			<th>ID</th>
-    			<th>NIK</th>
-		        <th>Nama</th>
-		        <th>Username</th>
+    			<th>Nama Survey</th>
+		        <th>Deskripsi</th>
+		        <th>Waktu Survey</th>
 		        <th>Status</th>
 		        <th>Aksi</th>
 			</tr>
     	</thead>
     	<tbody>     
-    		<?php foreach ($users as $key) {?>
-		    <tr>
-		        <td><?php echo $key['id_user'] ?></td>
-		        <td><?php echo $key['NIK'] ?></td>
-		        <td><?php echo $key['nama'] ?></td>
-		        <td><?php echo $key['username'] ?></td>
-		        <td><?php echo $key['status_user']." / ".$key['status'] ?></td>
-		        <td>
-		        	<?php 	echo anchor('/datauser/detail/'.$key['id_user'].'', 'Detail', "class='btn btn-primary'")."&nbsp"; 
-							echo anchor('/datauser/edit/'.$key['id_user'].'', 'Edit', "class='btn btn-info'")."&nbsp"; 
-							echo anchor('/datauser/delete/'.$key['id_user'].'', 'Delete', "class='btn btn-danger'")."&nbsp"; 
-		        	?>
-		        </td>
-		    </tr>
-		<?php } ?>
+    		<?php 
+    			foreach ($user as $keyu) {
+    				if ($keyu['status']=="Verified") {
+    						foreach ($survey as $key) {?>
+				    <tr>
+				    	<?php 
+				    		$string=$key['deskripsi'];
+				    		$desc=substr($string, 0, 20);
+				    	 ?>
+				        <td><?php echo $key['id_survey'] ?></td>
+				        <td><?php echo $key['nama_survey'] ?></td>
+				        <td><?php echo $desc.' ...' ?></td>
+				        <td><?php echo $key['waktu_survey'] ?></td>
+				        <td><?php echo $key['status'] ?></td>
+				        <td>
+				        	<?php 	 
+				        		 	echo anchor('/survey/detailUserSurvey/'.$key['id_survey'].'', 'Detail', "class='btn btn-primary'")."&nbsp"; 
+				        	?>
+				        </td>
+				    </tr>
+				<?php } 
+    				}
+    			}?>
+    		
     	</tbody>
 		</table>
 	</div>
@@ -45,6 +54,7 @@
 </div>
 </div>
 </div>
+
 
   <script type="text/javascript" src="<?php echo base_url()?>assets/jquery/jquery.min.js"></script>
 
@@ -57,5 +67,4 @@
 			$('.dataTables_paginate > a:last-child').append('<i class="icon-chevron-right shaded"></i>');
 		} );
 	</script>
-<?php $this->view('footer') ?>
-
+<?php $this->view('footer.php') ?>

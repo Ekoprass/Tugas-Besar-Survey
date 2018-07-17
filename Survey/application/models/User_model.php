@@ -63,15 +63,15 @@
 				'pekerjaan' => $this->input->post('pekerjaan'),
 				'umur' => $this->input->post('umur'),
 				'status' => 'Verified',
+				'foto' => $this ->upload->data('file_name'),
 
 				
 			);
 			$this->db->insert('user', $object);
 		}
 
-		public function editUser()
+		public function editUser($id)
 		{
-			$id= $this->input->post('id_user');
 			$object =  array(
 				'nama' => $this->input->post('nama'),
 				'NIK' => $this->input->post('NIK'),
@@ -87,7 +87,7 @@
 				'pekerjaan' => $this->input->post('pekerjaan'),
 				'umur' => $this->input->post('umur'),
 				'status' => 'Verified',
-
+				'foto' => $this ->upload->data('file_name'),
 				
 			);
 			$this->db->where('id_user', $id);

@@ -50,7 +50,7 @@
 
 		}
 
-		public function editDataUser()
+		public function editDataUser($id)
 		{
 
 			$this->load->model('user_model');
@@ -72,9 +72,25 @@
 			if ($this->form_validation->run()==false) {
 				redirect('formuser','refresh');
 			}else{
-					$this->user_model->editUser();
+				$config['upload_path'] = './assets/upload/';
+				$config['allowed_types'] = 'gif|jpg|png';
+				$config['max_size']  = '10000000';
+				$config['max_width']  = '10240';
+				$config['max_height']  = '7680';
+				
+				$this->load->library('upload', $config);
+				
+				if ( ! $this->upload->do_upload('foto')){
+					$error = array('error' => $this->upload->display_errors());
+					echo $error['error'];
+					die();
+					redirect('formuser','refresh');
+				}
+				else{
+					$this->user_model->editUser($id);
 					echo "<script>alert('Verifikasi Berhasil');
-							window.location.href='".site_url()."/login';</script>";
+							window.location.href='".site_url()."/formuser';</script>";
+				}
 			}
 		}
 
@@ -111,11 +127,28 @@
 			$this->form_validation->set_rules('umur', 'Umur', 'trim|required');
 			
 			if ($this->form_validation->run()==false) {
-				redirect('newuser','refresh');
+				redirect('NewUser','refresh');
 			}else{
-					$this->user_model->register();
+				$config['upload_path'] = './assets/upload/';
+				$config['allowed_types'] = 'gif|jpg|png';
+				$config['max_size']  = '10000000';
+				$config['max_width']  = '10240';
+				$config['max_height']  = '7680';
+				
+				$this->load->library('upload', $config);
+				
+				if ( ! $this->upload->do_upload('foto')){
+					$error = array('error' => $this->upload->display_errors());
+					echo $error['error'];
+					die();
+					redirect('newuser','refresh');
+				}
+				else{
+					$this->data_pegawai->register();
 					echo "<script>alert('Verifikasi Berhasil');
-							window.location.href='".site_url()."/datauser';</script>";
+							window.location.href='".site_url()."/NewUser';</script>";
+				}
+				
 			}
 		}
 

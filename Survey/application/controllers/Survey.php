@@ -171,9 +171,9 @@
 				}else{
 					$data['survey']=$this->Survey_model->getSurveyByPartisipan($id_user);
 				}
-			}if($query1->num_rows()==0){
-				$data['survey']=$this->Survey_model->getDataSurveyStat();
 			}
+				$data['survey']=$this->Survey_model->getDataSurveyStat();
+			
 			$data['menu2'] = $this->Datamenu->getMenu2($akses);
 			$data['menus'] = $this->Datamenu->getMenu($akses);
 			$this->load->view('user/tblsurvey',$data);

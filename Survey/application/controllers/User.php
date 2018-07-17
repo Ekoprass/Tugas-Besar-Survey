@@ -144,7 +144,7 @@
 					redirect('newuser','refresh');
 				}
 				else{
-					$this->data_pegawai->register();
+					$this->user_model->register();
 					echo "<script>alert('Verifikasi Berhasil');
 							window.location.href='".site_url()."/NewUser';</script>";
 				}

@@ -49,7 +49,7 @@
 
 		public function getDataSurveyByStatus($id_user)
 		{
-			$query=$this->db->query("select p.id_survey from partisipan p inner join survey s on p.id_survey=s.id_survey where id_user=".$id_user." and p.id_survey!=s.id_survey AND s.status='Aktif-Published'");
+			$query=$this->db->query("select p.id_survey from partisipan p inner join survey s on p.id_survey=s.id_survey where id_user!=".$id_user." and p.id_survey=s.id_survey AND s.status='Aktif-Published'");
 			return $query->result_array();
 		}
 
